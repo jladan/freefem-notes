@@ -1,0 +1,28 @@
+/* Meesh of a disc */
+
+int nbseg = 30;
+real R = 1, xc = 0, yc = 0;
+
+// First the border must be defined:
+
+/* The orientation (0 to 2pi) is important. (2pi to 0) would give a different
+ * orientation, with stuff on the outside.
+ * The interior is on the left as a walker goes around the border.
+ */
+//border circle(t = 2*pi, 0) {
+border circle(t = 0, 2*pi) {
+    // The label can be assigned any integer for getting different parts of the
+    // border
+    label = 1;
+    x = xc + R*cos(t);
+    y = yc + R*sin(t);
+}
+
+// Plotting the border is advisable, because you can see whether the different
+// parts line up, and the border looks correct
+plot(circle(nbseg), cmm = "border");
+
+
+// The finite element mesh is defined:
+mesh Th = buildmesh(circle(nbseg));
+plot(Th, cmm = "mesh of a circle");

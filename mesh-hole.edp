@@ -1,0 +1,43 @@
+/* Meesh of a disc */
+
+int nbseg = 10;
+real R1 = 1, R2 = R1/2, xc = 0, yc = 0;
+
+// First the border must be defined:
+
+/* The orientation (0 to 2pi) is important. (2pi to 0) would give a different
+ * orientation, with stuff on the outside.
+ * The interior is on the left as a walker goes around the border.
+ */
+//border circle(t = 2*pi, 0) {
+border circle1(t = 0, 2*pi) {
+    // The label can be assigned any integer for getting different parts of the
+    // border
+    label = 1;
+    x = xc + R1*cos(t);
+    y = yc + R1*sin(t);
+}
+
+/* We can use the opposite orientation for a hole in the middle to create a hole
+ * But also, for different subdomains, use the anti-clockwise rotation to keep
+ * the interior.
+ */
+border circle2(t = 0, 2*pi) {
+    label = 2;
+    x = xc + R2*cos(t);
+    y = yc + R2*sin(t);
+}
+
+
+/* For good meshes, most of the triangles should be equal.
+ * Because of this, we should use the same number of segments per unit length
+ */
+plot(circle1(nbseg*2*pi*R1) + circle2(-nbseg*2*pi*R2), cmm = "border");
+
+
+/* The orientation of the curve can be changed at mesh creation by using a
+ * negative number of segments
+ */
+mesh Th = buildmesh(circle1(nbseg*2*pi*R1) +
+                    circle2(-nbseg*2*pi*R2));
+plot(Th, cmm = "mesh of a circle with subdomain");

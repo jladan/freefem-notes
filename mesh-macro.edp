@@ -1,0 +1,29 @@
+/* Mesh of a disc */
+
+/* A macro used to generate source code with a simple insertion and replace
+ * Note: the `//` signals end of macro, so for comments, you must use /*
+ */
+macro Bcircle(bname, Rm, xm, ym, labelm)
+    border bname(t=0, 2*pi) {
+        label = labelm;
+        x = xm + Rm*cos(t);
+        y = ym + Rm*sin(t);
+    } //EOM
+
+// Parameters
+int nbseg = 10;
+real R1 = 1, R2 = R1/2, xc = 0, yc = 0;
+
+// First the border must be defined:
+Bcircle(circle1, R1, xc, yc, 1);
+Bcircle(circle2, R2, xc, yc, 2);
+
+plot(circle1(nbseg*2*pi*R1) + circle2(-nbseg*2*pi*R2), cmm = "border");
+
+
+/* The orientation of the curve can be changed at mesh creation by using a
+ * negative number of segments
+ */
+mesh Th = buildmesh(circle1(nbseg*2*pi*R1) +
+                    circle2(-nbseg*2*pi*R2));
+plot(Th, cmm = "mesh of a circle with subdomain");
