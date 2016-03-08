@@ -87,3 +87,12 @@ Beyond the typical problems of Macro definitions, there are scoping issues. It's
     R = R/2; // Changes the radius of the ``circle defined above``
 
     mesh( circle(10)); // gives a disc of radus 0.5
+
+Finite Element Representation
+=============================
+
+In freeFem, we are approximating the functional spaces ``H^1`` and ``V`` (with added BC's) on a triangular mesh. The basis functions on each cell in the mesh can be in various functional spaces.
+
+In the case, of this demo, we use P1 elements, and the basis functions are the interpolating hat functions with peaks at each vertex of the mesh.
+
+``Th.nv`` will give the number of vertices, while ``Th.nt`` gives the number of triangles of the mesh.
