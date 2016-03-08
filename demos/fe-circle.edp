@@ -1,6 +1,6 @@
 /* Meesh of a disc */
 
-int nbseg = 100;
+int nbseg = 10;
 real R = 1, xc = 0, yc = 0;
 
 // First the border must be defined:

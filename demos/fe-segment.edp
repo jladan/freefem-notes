@@ -1,0 +1,38 @@
+/* Mesh of a square */
+
+macro Bseg(bname, x1, y1, x2, y2, labelm)
+    border bname(t=0, 1) {
+        label = labelm;
+        x = x1 + t*(x2-x1);
+        y = y1 + t*(y2-y1);
+    } //
+
+
+int nbseg = 30;
+real L = 2, H = 1;
+real x1 = 0, y1 = 0;
+real x2 = 1, y2 = 0;
+real x3 = 2, y3 = 2;
+real x4 = 0, y4 = 1;
+
+Bseg( b1, x1, y1, x2, y2, 1);
+Bseg( b2, x2, y2, x3, y3, 2);
+Bseg( b3, x3, y3, x4, y4, 3);
+Bseg( b4, x4, y4, x1, y1, 4);
+
+mesh Th = buildmesh(
+                    b1(nbseg) +
+                    b2(nbseg) +
+                    b3(nbseg) +
+                    b4(nbseg) );
+plot(Th, cmm = "mesh of a square");
+
+// FE space
+fespace Vh(Th, P1);
+// Vh is a type used to define finite element variables
+// it's basically a finite element type. and u is a finite-element function
+Vh u = x*x + y*y;
+
+// All this does is calculate ``u`` on the mesh.
+plot(u, dim=3, fill=1, wait=1);
+
