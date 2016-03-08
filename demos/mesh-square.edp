@@ -1,0 +1,17 @@
+/* Mesh of a square */
+
+int nbseg = 30;
+real L = 2, H = 1;
+real xc1 = 0, yc1 = 0;
+
+
+/* There is a built-in function called ``square``. it generates a square [0,1]x[0,1].
+ * But the third argument is an *parametric function* of a vector where x,y are the parameters.
+ *
+ * Because the labels are not given by us explicitly, note that the sides are
+ * given labels 1,2,3,4 starting from the bottom going anti-clockwise.
+ */
+mesh Th = square(nbseg*L,
+                 nbseg*H,
+                 [xc1 + x*L, yc1 + y*H]);
+plot(Th, cmm = "mesh of a square");
