@@ -41,3 +41,13 @@ mesh Th = buildmesh(circle1(nbseg*2*pi*R1) +
                     circle2(nbseg*2*pi*R2));
 // adding the ps argument lets you output a post-script file
 plot(Th, cmm = "mesh of a circle with subdomain", ps="mesh-subdomain.ps");
+
+/* Identifying subdomains
+ * ----------------------
+ *
+ * Subdomains can be identified with ``<mesh-object>(<x>, <y>).region``. This
+ * gives the region number for the subdomain that the point ``(<x>, <y>)`` is
+ * contained in. This is much like the label applied to boundaries.
+ */
+cout << "inner region:: number = " << Th(xc, yc).region << endl;
+cout << "outer region:: number = " << Th(xc + (R2+R1), yc).region << endl;

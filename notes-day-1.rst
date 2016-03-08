@@ -23,6 +23,8 @@ One example: ice formation: navier-stokes-boussinesq, with phase-change. The mes
 Meshes
 ------
 
+Most of the details of execution are contained in the ``mesh-*.edp`` files. They can be executed by running ``FreeFem++ <file-name>`` on the command line (if FreeFem++ is installed in the ``$PATH``.
+
 1) mesh of a circle
 2) circle with a subdomain
 3) anulus (holes)
@@ -38,3 +40,8 @@ Macros
 ------
 
 FreeFem lets you write macros, which are useful for circles, etc.)
+
+Labels
+------
+
+The label attribute is very important, especially when setting boundary conditions.
