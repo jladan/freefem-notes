@@ -11,6 +11,9 @@ border darc(t = 0, pi) {
     y = yc + R*sin(t);
 }
 
+/* If it went from 0 to xc+R instead, then there would be a hole in the border,
+ * and the mesh wouldn't work. This can be seen by plotting the border;
+ */
 border daxis(t = xc-R, xc+R) {
     label = 2;
     x = t;
@@ -21,7 +24,7 @@ border daxis(t = xc-R, xc+R) {
 plot(darc(nbseg*pi*R) + daxis(-nbseg*2*R), cmm = "border");
 
 // This one is fine
-plot(darc(nbseg*pi*R) + daxis(-nbseg*2*R), cmm = "border");
+plot(darc(nbseg*pi*R) + daxis(+nbseg*2*R), cmm = "border");
 
 mesh Th = buildmesh(darc(nbseg*2*pi*R) +
                     daxis(nbseg*2*R));
