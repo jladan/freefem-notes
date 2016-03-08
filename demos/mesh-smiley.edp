@@ -18,7 +18,7 @@ real R1 = 1, R2 = R1/2, xc = 0, yc = 0;
 Bellipse(outside, 2, 2, 0, 0, 1);
 Bellipse(leye, .5, .5, -1, 1, 1);
 Bellipse(reye, .5, .5, 1, 1, 1);
-Bellipse(mouth, 1, .5, 0, -1, 1);
+Bellipse(mouth, .5, 1, 0, -.75, 1);
 
 // length of ellipse (approximate)
 real Lout = 4*pi;
