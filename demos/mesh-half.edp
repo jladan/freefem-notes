@@ -1,0 +1,28 @@
+/* Meesh of a disc */
+
+int nbseg = 10;
+real R = 1, xc = 0, yc = 0;
+
+border darc(t = 0, pi) {
+    // The label can be assigned any integer for getting different parts of the
+    // border
+    label = 1;
+    x = xc + R*cos(t);
+    y = yc + R*sin(t);
+}
+
+border daxis(t = xc-R, xc+R) {
+    label = 2;
+    x = t;
+    y = yc;
+}
+
+// This would make an error due to orientation
+plot(darc(nbseg*pi*R) + daxis(-nbseg*2*R), cmm = "border");
+
+// This one is fine
+plot(darc(nbseg*pi*R) + daxis(-nbseg*2*R), cmm = "border");
+
+mesh Th = buildmesh(darc(nbseg*2*pi*R) +
+                    daxis(nbseg*2*R));
+plot(Th, cmm = "mesh of a half-disc");

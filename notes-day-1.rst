@@ -19,6 +19,10 @@ Mesh geration can be given metrics/heuristics to control it. E.g. axi-symmetric.
 
 One example: ice formation: navier-stokes-boussinesq, with phase-change. The mesh is adapted to be finer near the interfaces: two counter-roatating vortices, and solid-liquid. Ironically, nothing mentioned about the difficulty of the ice interface.
 
+FreeFem files
+-------------
+
+The source files for FreeFem are plain-text files, typically using the ``.edp`` extension. The syntax is similar to C++, but lacks namespaces.
 
 Meshes
 ------
@@ -39,9 +43,47 @@ Most of the details of execution are contained in the ``mesh-*.edp`` files. They
 Macros
 ------
 
-FreeFem lets you write macros, which are useful for circles, etc.)
+FreeFem lets you write macros, which are useful for circles, etc. This is the same as the typical C precompiler. NB: for comments inside macros, we must use ``/* */`` and not ``//``, because the latter is used to end a macro.
+
+The macro behaviour is just like C/C++: direct substitution of text, so be careful of expressions. For example, the use of macro::
+
+    macro inc(x) x+1 //
+
+    x = inc(x)*2
+
+would give the code::
+
+    x = x+1*2
+
+which is likely not the intended result.
+
+Likewise::
+
+    macro double(x) x*2 //
+
+    x = double(x+1)
+
+gives::
+
+    x = x+1*2
 
 Labels
 ------
 
-The label attribute is very important, especially when setting boundary conditions.
+The label attribute is very important, especially when setting boundary conditions. Subdomains also have labels (details are in the ``mesh-subdomains.edp`` demo).
+
+Border Definitions
+------------------
+
+Beyond the typical problems of Macro definitions, there are scoping issues. It's block-wise scoping and anything not in the blocks is global-scope. E.g. changing the value of a variable used in a border definition mucks everything up::
+
+    real R = 1;
+    border circle(t=0, 2*pi) {
+        //...
+        x = xc + R*cos(t);
+        //...
+    }
+
+    R = R/2; // Changes the radius of the ``circle defined above``
+
+    mesh( circle(10)); // gives a disc of radus 0.5

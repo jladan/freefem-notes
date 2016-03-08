@@ -1,7 +1,7 @@
 /* Mesh of a disc */
 
 /* A macro used to generate source code with a simple insertion and replace
- * Note: the `//` signals end of macro, so for comments, you must use /*
+ * Note: the `//` signals end of macro, so for comments, you must use /* notation
  */
 macro Bcircle(bname, Rm, xm, ym, labelm)
     border bname(t=0, 2*pi) {
