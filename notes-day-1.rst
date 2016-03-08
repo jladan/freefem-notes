@@ -19,6 +19,21 @@ Mesh geration can be given metrics/heuristics to control it. E.g. axi-symmetric.
 
 One example: ice formation: navier-stokes-boussinesq, with phase-change. The mesh is adapted to be finer near the interfaces: two counter-roatating vortices, and solid-liquid. Ironically, nothing mentioned about the difficulty of the ice interface.
 
+
+Meshes
+------
+
+1) mesh of a circle
+2) circle with a subdomain
+3) anulus (holes)
+4) Anulus using macros
+5) multiple connecting segments (not done for time)
+
+    When composing meshes, be aware of orientation of borders. If composing multiple border sebments together, the ``+`` operator must go in the couter-clockwise orientation as well.
+
+    Plotting the borders (not mesh) will generally show if corners are missing, or orientations are correct.
+6) "Smiley mesh"
+
 Macros
 ------
 

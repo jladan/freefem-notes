@@ -1,0 +1,39 @@
+/* Mesh of a disc */
+
+/* A macro used to generate source code with a simple insertion and replace
+ * Note: the `//` signals end of macro, so for comments, you must use /*
+ */
+macro Bellipse(bname, r1, r2, xm, ym, labelm)
+    border bname(t=0, 2*pi) {
+        label = labelm;
+        x = xm + r1*cos(t);
+        y = ym + r2*sin(t);
+    } //EOM
+
+// Parameters
+int nbseg = 10;
+real R1 = 1, R2 = R1/2, xc = 0, yc = 0;
+
+// Border definition
+Bellipse(outside, 2, 2, 0, 0, 1);
+Bellipse(leye, .5, .5, -1, 1, 1);
+Bellipse(reye, .5, .5, 1, 1, 1);
+Bellipse(mouth, 1, .5, 0, -1, 1);
+
+// length of ellipse (approximate)
+real Lout = 4*pi;
+real Leye = 2*pi;
+real Lmouth = pi*sqrt(2*(1^2 + .5^2));
+
+plot(outside(nbseg*Lout) +
+     leye(-nbseg*Leye) +
+     reye(-nbseg*Leye) +
+     mouth(-nbseg*Lmouth) , cmm = "border");
+
+
+mesh Th = buildmesh(
+     outside(nbseg*Lout) +
+     leye(-nbseg*Leye) +
+     reye(-nbseg*Leye) +
+     mouth(-nbseg*Lmouth));
+plot(Th, cmm = "mesh of a circle with subdomain");
